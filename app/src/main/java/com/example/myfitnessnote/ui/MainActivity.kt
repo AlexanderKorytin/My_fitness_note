@@ -1,10 +1,11 @@
-package com.example.myfitnessnote
+package com.example.myfitnessnote.ui
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.myfitnessnote.R
 import com.example.myfitnessnote.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

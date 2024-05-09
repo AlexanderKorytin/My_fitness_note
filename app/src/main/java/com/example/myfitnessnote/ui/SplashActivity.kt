@@ -1,4 +1,4 @@
-package com.example.myfitnessnote
+package com.example.myfitnessnote.ui
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,10 +6,9 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import kotlinx.coroutines.CoroutineScope
+import com.example.myfitnessnote.R
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
