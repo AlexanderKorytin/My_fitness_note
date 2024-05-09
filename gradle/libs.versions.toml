@@ -9,10 +9,15 @@ appcompat = "1.6.1"
 material = "1.12.0"
 activity = "1.9.0"
 constraintlayout = "2.1.4"
-splash = "1.0.0"
 coroutines = "1.7.3"
+fragment = "1.7.0"
+nav_ui = "2.7.7"
+nav_frag = "2.7.7"
 
 [libraries]
+nav-fragment = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "nav_frag" }
+nav-ui = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "nav_ui" }
+fragment = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "fragment" }
 coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutines" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
