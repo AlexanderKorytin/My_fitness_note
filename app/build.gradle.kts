@@ -41,6 +41,9 @@ android {
 
 dependencies {
 
+    implementation(libs.fragment)
+    implementation(libs.nav.ui)
+    implementation(libs.nav.fragment)
     implementation(libs.coroutines)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
