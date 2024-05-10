@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="exercise">
+        <item>отдых|60|</item>                                       <!--0 -->
+        <item>упражение на бицепс сидя|x30|biceps.gif</item>         <!--1 -->
+        <item>тяга гантели в наклоне к поясу|x30|dumbbell.gif</item> <!--2 -->
+        <item>сгибания лежа|x30|flexion.gif</item>                   <!--3 -->
+        <item>выпрыгивания|x30|jumping out.gif</item>                <!--4 -->
+        <item>отжимания с усложнением|x10|push-ups.gif</item>        <!--5 -->
+        <item>бег на месте|120|run.gif</item>                        <!--6 -->
+        <item>ножницы|60|swing_legs.gif</item>                       <!--7 -->
+        <item>махи ногами|60|swing_foot.gif</item>                   <!--8 -->
+        <item>присядания|x60|sitting_down.gif</item>                 <!--9 -->
+        <item>наклооны|x10|slant.gif</item>                          <!--10 -->
+        <item>присядания с усложнением|x10|squats.gif</item>         <!--11 -->
+    </string-array>
+
+    <string-array name="days_execise">
+        <item>6,0,9,0,1,0,8,0,4,0,3</item><!-- день 1 -->
+        <item>6,0,11,0,2,0,7,0,5,0,10</item><!-- день 2 -->
+        <item>6,0,9,0,1,0,8,0,4,0,3</item><!-- день 3 -->
+        <item>6,0,11,0,2,0,7,0,5,0,10</item><!-- день 4 -->
+        <item>6,0,9,0,1,0,8,0,4,0,3</item><!-- день 5 -->
+        <item>6,0,11,0,2,0,7,0,5,0,10</item><!-- день 6 -->
+        <item>6,0,3,0,7,0,6,0,9,8,0,11</item><!-- день 7 -->
+    </string-array>
+</resources>
