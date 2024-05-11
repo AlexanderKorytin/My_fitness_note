@@ -11,7 +11,8 @@ data class DayItemDto(
 fun map(dayItemDto: DayItemDto): DayItem {
     return DayItem(
         dayId = dayItemDto.dayId,
-        exercisesCount = dayItemDto.exercises.split(DELIMITER).size
+        exercisesCount = dayItemDto.exercises.split(DELIMITER).size,
+        isComplete = dayItemDto.isComplete
     )
 }
 
