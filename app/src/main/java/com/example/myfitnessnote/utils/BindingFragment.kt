@@ -6,11 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
+import com.example.myfitnessnote.presentetion.models.DaysScreenState
 
 abstract class BindingFragment<T : ViewBinding> : Fragment() {
 
     private var _binding: T? = null
-    private val binding get() = _binding!!
+    protected val binding get() = _binding!!
     abstract fun createBinding(inflater: LayoutInflater, container: ViewGroup?): T
 
     override fun onCreateView(
