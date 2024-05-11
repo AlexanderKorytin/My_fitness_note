@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myfitnessnote.domain.api.DaysInteractor
 import com.example.myfitnessnote.presentetion.models.DaysIntent
+import com.example.myfitnessnote.presentetion.models.DaysScreenData
 import com.example.myfitnessnote.presentetion.models.DaysScreenState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -30,7 +31,7 @@ class DaysViewModel(private val interactor: DaysInteractor) : ViewModel() {
     private suspend fun getDaysList() {
         try {
             val list = interactor.getDayList()
-            _daysScreenState.postValue(DaysScreenState.Content(list))
+            _daysScreenState.postValue(DaysScreenState.Content(DaysScreenData(days = list)))
         } catch (e: Exception) {
             _daysScreenState.postValue(DaysScreenState.Error)
             delay(DELAY_REQUEST_LIST)
