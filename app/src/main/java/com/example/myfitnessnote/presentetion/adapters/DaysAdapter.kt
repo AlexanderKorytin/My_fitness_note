@@ -12,7 +12,7 @@ class DaysAdapter(private val onDayClick: (day: DayItem) -> Unit) : ListAdapter<
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DaysViewHolder {
         val layoutInspector = LayoutInflater.from(parent.context)
         val viewBinding = DayItemBinding.inflate(layoutInspector, parent, false)
-        return DaysViewHolder(viewBinding)
+        return DaysViewHolder(viewBinding, parent.context)
     }
 
     override fun onBindViewHolder(holder: DaysViewHolder, position: Int) {

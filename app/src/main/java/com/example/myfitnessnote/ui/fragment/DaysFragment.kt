@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.myfitnessnote.R
 import com.example.myfitnessnote.databinding.FragmentDaysBinding
 import com.example.myfitnessnote.domain.models.DayItem
 import com.example.myfitnessnote.presentetion.adapters.DaysAdapter
@@ -76,7 +77,7 @@ class DaysFragment : BindingFragment<FragmentDaysBinding>() {
     }
 
     private fun showContent(data: DaysScreenData) = with(binding) {
-        val remainsDays = "Осталось дней: ${data.remainsDays}"
+        val remainsDays = "${requireContext().getString(R.string.remains_days)} ${data.remainsDays}"
         daysList.isVisible = true
         progressRequest.isVisible = false
         tvError.isVisible = false

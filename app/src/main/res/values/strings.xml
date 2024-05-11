@@ -2,4 +2,7 @@
     <string name="app_name">My fitness note</string>
     <string name="slogan">Будьте в форме, будьте здоровы</string>
     <string name="error_days_list">Внутренняя ошибка!</string>
+    <string name="day">День</string>
+    <string name="exercite">упражнений</string>
+    <string name="remains_days">осталось дней:</string>
 </resources>
