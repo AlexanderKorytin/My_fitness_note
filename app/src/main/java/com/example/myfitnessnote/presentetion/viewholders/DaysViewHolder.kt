@@ -6,11 +6,11 @@ import com.example.myfitnessnote.R
 import com.example.myfitnessnote.databinding.DayItemBinding
 import com.example.myfitnessnote.domain.models.DayItem
 
-class DaysViewHolder(private val rootBinding: DayItemBinding, private val context: Context) : RecyclerView.ViewHolder(rootBinding.root){
-    fun bind(dayItem: DayItem){
-        val dayName = "${context.getString(R.string.day)} ${dayItem.dayId+1}"
-        val exerciseCounter = "${dayItem.exercisesCount} ${context.getString(R.string.exercite)}"
-        rootBinding.tvDayCounter.text = exerciseCounter
-        rootBinding.tvDayName.text = dayName
+class DaysViewHolder(private val rootBinding: DayItemBinding) : RecyclerView.ViewHolder(rootBinding.root){
+    fun bind(dayItem: DayItem) = with(rootBinding){
+        val dayName = "${root.context.getString(R.string.day)} ${dayItem.dayId+1}"
+        val exerciseCounter = "${dayItem.exercisesCount} ${root.context.getString(R.string.exercite)}"
+        tvDayCounter.text = exerciseCounter
+        tvDayName.text = dayName
     }
 }
