@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.example.myfitnessnote.R
 import com.example.myfitnessnote.data.models.DayItemDto
+import com.example.myfitnessnote.data.models.ExerciseDto
 import com.example.myfitnessnote.data.storage.api.DaysExercisesStorage
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -21,6 +22,17 @@ data class DaysExercisesSharedPrefStorage(
             createDayList()
         }
         return getDayListFromSharedPref()
+    }
+
+    override fun getListExercises(): List<ExerciseDto> {
+        return context.resources.getStringArray(R.array.exercise).map {
+            val currentExercise = it.split(EXERCISE_DELIMITER)
+            ExerciseDto(
+                currentExercise[0],
+                currentExercise[1],
+                currentExercise[2]
+            )
+        }
     }
 
     private fun getDayListFromSharedPref(): List<DayItemDto> {
@@ -42,5 +54,6 @@ data class DaysExercisesSharedPrefStorage(
     companion object {
         const val IS_FIRST_START = "first_start"
         const val DAYS = "days"
+        const val EXERCISE_DELIMITER = '|'
     }
 }
