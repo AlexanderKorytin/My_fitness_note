@@ -9,5 +9,14 @@
         android:id="@+id/daysFragment"
         android:name="com.example.myfitnessnote.ui.fragment.DaysFragment"
         android:label="fragment_days"
-        tools:layout="@layout/fragment_days" />
+        tools:layout="@layout/fragment_days" >
+        <action
+            android:id="@+id/action_daysFragment_to_exerciseListFragment"
+            app:destination="@id/exerciseListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/exerciseListFragment"
+        android:name="com.example.myfitnessnote.ui.fragment.ExerciseListFragment"
+        android:label="fragment_exercise_list"
+        tools:layout="@layout/fragment_exercise_list" />
 </navigation>
