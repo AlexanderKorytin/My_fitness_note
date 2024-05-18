@@ -4,17 +4,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myfitnessnote.R
 import com.example.myfitnessnote.databinding.FragmentDaysBinding
 import com.example.myfitnessnote.domain.models.DayItem
 import com.example.myfitnessnote.presentetion.adapters.DaysAdapter
-import com.example.myfitnessnote.presentetion.models.DaysIntent
-import com.example.myfitnessnote.presentetion.models.DaysScreenData
-import com.example.myfitnessnote.presentetion.models.DaysScreenState
+import com.example.myfitnessnote.presentetion.models.days.DaysIntent
+import com.example.myfitnessnote.presentetion.models.days.DaysScreenData
+import com.example.myfitnessnote.presentetion.models.days.DaysScreenState
 import com.example.myfitnessnote.presentetion.vievmodel.DaysViewModel
 import com.example.myfitnessnote.utils.BindingFragment
+import com.example.myfitnessnote.utils.debounce
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DaysFragment : BindingFragment<FragmentDaysBinding>() {
@@ -34,6 +38,7 @@ class DaysFragment : BindingFragment<FragmentDaysBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        onDayClick()
         bind()
     }
 
@@ -84,5 +89,22 @@ class DaysFragment : BindingFragment<FragmentDaysBinding>() {
         daysAdapter.submitList(data.days)
         tvTextProgress.text = remainsDays
         progressExercises.setProgress(data.progress, true)
+    }
+
+    private fun onDayClick() {
+        dayClickDebounce = debounce(
+            delayMillis = DELAY_DAY_CLICK,
+            coroutineScope = viewLifecycleOwner.lifecycleScope,
+            false
+        ) {
+            findNavController().navigate(
+                R.id.action_daysFragment_to_exerciseListFragment,
+                bundleOf(ExerciseListFragment.DAY_ID to it.dayId)
+            )
+        }
+    }
+
+    companion object {
+        private const val DELAY_DAY_CLICK = 300L
     }
 }
