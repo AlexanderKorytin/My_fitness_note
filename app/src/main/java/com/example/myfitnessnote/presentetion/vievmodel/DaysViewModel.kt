@@ -5,9 +5,9 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myfitnessnote.domain.api.DaysInteractor
-import com.example.myfitnessnote.presentetion.models.DaysIntent
-import com.example.myfitnessnote.presentetion.models.DaysScreenData
-import com.example.myfitnessnote.presentetion.models.DaysScreenState
+import com.example.myfitnessnote.presentetion.models.days.DaysIntent
+import com.example.myfitnessnote.presentetion.models.days.DaysScreenData
+import com.example.myfitnessnote.presentetion.models.days.DaysScreenState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
