@@ -42,6 +42,7 @@ android {
 
 dependencies {
 
+    implementation(libs.glide)
     implementation(libs.gson)
     implementation(libs.koin)
     implementation(libs.fragment)

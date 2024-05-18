@@ -18,8 +18,10 @@ lifecycleLivedataKtx = "2.7.0"
 lifecycleViewmodelKtx = "2.7.0"
 koin = "3.5.3"
 gson = "2.10.1"
+glide = "4.16.0"
 
 [libraries]
+glide = {group = "com.github.bumptech.glide", name = "glide", version.ref = "glide"}
 gson = {group ="com.google.code.gson", name = "gson", version.ref = "gson"}
 koin =  {group = "io.insert-koin", name = "koin-android", version.ref = "koin"}
 nav-fragment = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "nav_frag" }
