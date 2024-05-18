@@ -3,7 +3,9 @@
     <string name="slogan">Будьте в форме, будьте здоровы</string>
     <string name="error_days_list">Внутренняя ошибка!</string>
     <string name="day">День</string>
-    <string name="exercite">упражнений</string>
+    <string name="exercise">упражнений</string>
     <string name="remains_days">осталось дней:</string>
     <string name="days">Список дней</string>
+    <string name="exercises">список упражнений</string>
+    <string name="start">Начать</string>
 </resources>
