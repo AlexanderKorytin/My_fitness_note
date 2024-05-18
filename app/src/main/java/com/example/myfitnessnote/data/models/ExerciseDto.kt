@@ -13,7 +13,7 @@ data class ExerciseDto(
 fun map(exerciseDto: ExerciseDto): ExerciseItem {
     return ExerciseItem(
         name = exerciseDto.exerciseName,
-        duration = exerciseDto.exerciseDuration.split(DURATION_DELIMITER)[1].toInt(),
+        duration = exerciseDto.exerciseDuration.split(DURATION_DELIMITER).last().toInt(),
         durationLabel = getDurationLabel(exerciseDto.exerciseDuration.split(DURATION_DELIMITER)[0]),
         icon = exerciseDto.exerciseIcon
     )
