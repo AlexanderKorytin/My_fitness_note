@@ -2,12 +2,12 @@
 <resources>
     <string-array name="exercise">
         <item>отдых|t:60|</item>                                       <!--0 -->
-        <item>упражение на бицепс сидя|x30|biceps.gif</item>         <!--1 -->
-        <item>тяга гантели в наклоне к поясу|x30|dumbbell.gif</item> <!--2 -->
+        <item>упражение на бицепс сидя|r:30|biceps.gif</item>         <!--1 -->
+        <item>тяга гантели в наклоне к поясу|r:30|dumbbell.gif</item> <!--2 -->
         <item>сгибания лежа|r:30|flexion.gif</item>                   <!--3 -->
-        <item>выпрыгивания|r:30|jumping out.gif</item>                <!--4 -->
-        <item>отжимания с усложнением|x10|push-ups.gif</item>        <!--5 -->
-        <item>бег на месте|t120|run.gif</item>                        <!--6 -->
+        <item>выпрыгивания|r:30|jumping_out.gif</item>                <!--4 -->
+        <item>отжимания с усложнением|r:10|push_ups.gif</item>        <!--5 -->
+        <item>бег на месте|t:120|run.gif</item>                        <!--6 -->
         <item>ножницы|t:60|swing_legs.gif</item>                       <!--7 -->
         <item>махи ногами|t:60|swing_foot.gif</item>                   <!--8 -->
         <item>присядания|r:60|sitting_down.gif</item>                 <!--9 -->
