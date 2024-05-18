@@ -1,4 +1,4 @@
-package com.example.myfitnessnote.presentetion.models
+package com.example.myfitnessnote.presentetion.models.days
 
 import com.example.myfitnessnote.domain.models.DayItem
 

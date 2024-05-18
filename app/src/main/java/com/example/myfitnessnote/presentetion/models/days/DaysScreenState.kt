@@ -1,7 +1,4 @@
-package com.example.myfitnessnote.presentetion.models
-
-import androidx.annotation.StringRes
-import com.example.myfitnessnote.domain.models.DayItem
+package com.example.myfitnessnote.presentetion.models.days
 
 sealed interface DaysScreenState {
     data object Loading: DaysScreenState
