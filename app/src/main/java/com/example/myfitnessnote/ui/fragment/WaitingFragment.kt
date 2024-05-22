@@ -9,11 +9,6 @@ import androidx.navigation.fragment.findNavController
 import com.example.myfitnessnote.databinding.FragmentWaitingBinding
 import com.example.myfitnessnote.utils.BindingFragment
 import com.example.myfitnessnote.utils.showExerciseProgress
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import java.text.SimpleDateFormat
-import java.util.Locale
 
 
 class WaitingFragment : BindingFragment<FragmentWaitingBinding>() {
@@ -31,9 +26,9 @@ class WaitingFragment : BindingFragment<FragmentWaitingBinding>() {
     }
 
     private fun bind() = with(binding) {
-       showExerciseProgress(COUNTER_START_VALUE, lifecycleScope, tvWaitCounter, tvWaitProgress){
-           findNavController().navigateUp()
-       }
+        showExerciseProgress(COUNTER_START_VALUE, lifecycleScope, tvWaitCounter, tvWaitProgress) {
+            findNavController().navigateUp()
+        }
     }
 
     companion object {
