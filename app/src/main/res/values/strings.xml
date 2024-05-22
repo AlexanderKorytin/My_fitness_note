@@ -8,4 +8,7 @@
     <string name="days">Список дней</string>
     <string name="exercises">список упражнений</string>
     <string name="start">Начать</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="message_ready">Приготовтесь</string>
 </resources>
