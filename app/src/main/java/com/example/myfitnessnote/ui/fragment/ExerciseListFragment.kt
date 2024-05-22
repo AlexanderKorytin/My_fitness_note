@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.myfitnessnote.R
 import com.example.myfitnessnote.databinding.FragmentExerciseListBinding
 import com.example.myfitnessnote.domain.models.ExerciseItem
 import com.example.myfitnessnote.presentetion.adapters.ExercisesAdapter
@@ -35,7 +37,7 @@ class ExerciseListFragment : BindingFragment<FragmentExerciseListBinding>() {
             tvExercisesList.layoutManager = LinearLayoutManager(requireContext())
             tvExercisesList.adapter = adapter
             botStart.setOnClickListener {
-
+                findNavController().navigate(R.id.action_exerciseListFragment_to_waitingFragment)
             }
         }
         bind()
