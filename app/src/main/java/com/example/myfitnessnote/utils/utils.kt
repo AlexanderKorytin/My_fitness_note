@@ -30,7 +30,7 @@ fun <T> debounce(
     }
 }
 
-fun showExerciseProgress(
+suspend fun showExerciseProgress(
     time: Int,
     scope: CoroutineScope,
     tvCounter: TextView,
@@ -40,15 +40,15 @@ fun showExerciseProgress(
     tvProcess.max = time
     var progressCurrentValue =
         time
-    val processStep = 100
+    val processStep = PROGRESS_DELAY.toInt()
     scope.launch(Dispatchers.IO) {
-        val counterJob = scope.launch {
+        val counterJob = scope.launch(Dispatchers.Main) {
             for (i in time downTo 0 step COUNTER_STEP) {
                 tvCounter.text = SimpleDateFormat("mm:ss", java.util.Locale.getDefault()).format(i)
                 delay(COUNTER_DELAY)
             }
         }
-        val progressJob = scope.launch(Dispatchers.IO) {
+        val progressJob = scope.launch(Dispatchers.Main) {
             while (progressCurrentValue >= 0) {
                 delay(PROGRESS_DELAY)
                 progressCurrentValue -= processStep
