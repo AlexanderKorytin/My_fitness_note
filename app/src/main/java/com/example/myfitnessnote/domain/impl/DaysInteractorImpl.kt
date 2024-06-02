@@ -5,11 +5,14 @@ import com.example.myfitnessnote.domain.api.DaysRepository
 import com.example.myfitnessnote.domain.models.DayItem
 import com.example.myfitnessnote.domain.models.ExerciseItem
 import com.example.myfitnessnote.domain.models.ExercisesListResult
-import java.lang.IndexOutOfBoundsException
 
 class DaysInteractorImpl(private val repository: DaysRepository) : DaysInteractor {
     override fun getDayList(): List<DayItem> {
-       return repository.getDayList()
+        return repository.getDayList()
+    }
+
+    override fun saveDayList(dayList: List<DayItem>) {
+        repository.saveDayList(dayList)
     }
 
     override fun getDayExercises(dayId: Int): ExercisesListResult {

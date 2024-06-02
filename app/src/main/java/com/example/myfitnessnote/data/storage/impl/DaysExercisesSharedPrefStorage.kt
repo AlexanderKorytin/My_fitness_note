@@ -35,6 +35,10 @@ data class DaysExercisesSharedPrefStorage(
         }
     }
 
+    override fun updateDayList(dayList: List<DayItemDto>) {
+        sharedPref.edit().putString(DAYS, json.toJson(dayList)).apply()
+    }
+
     private fun getDayListFromSharedPref(): List<DayItemDto> {
         return json.fromJson(
             sharedPref.getString(DAYS, json.toJson(emptyList<DayItemDto>())),

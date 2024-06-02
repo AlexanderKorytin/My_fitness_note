@@ -7,4 +7,6 @@ interface DaysExercisesStorage {
     fun getDayList(): List<DayItemDto>
 
     fun getListExercises(): List<ExerciseDto>
+
+    fun updateDayList(dayList: List<DayItemDto>)
 }
