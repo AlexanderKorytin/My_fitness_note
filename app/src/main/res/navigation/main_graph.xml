@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/daysFragment"
-        android:name="com.example.myfitnessnote.ui.fragment.DaysFragment"
+        android:name="com.example.myfitnessnote.ui.fragments.DaysFragment"
         android:label="fragment_days"
         tools:layout="@layout/fragment_days" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/exerciseListFragment"
-        android:name="com.example.myfitnessnote.ui.fragment.ExerciseListFragment"
+        android:name="com.example.myfitnessnote.ui.fragments.ExerciseListFragment"
         android:label="fragment_exercise_list"
         tools:layout="@layout/fragment_exercise_list" >
         <action
@@ -25,7 +25,29 @@
     </fragment>
     <fragment
         android:id="@+id/waitingFragment"
-        android:name="com.example.myfitnessnote.ui.fragment.WaitingFragment"
+        android:name="com.example.myfitnessnote.ui.fragments.WaitingFragment"
         android:label="fragment_waiting"
-        tools:layout="@layout/fragment_waiting" />
+        tools:layout="@layout/fragment_waiting" >
+        <action
+            android:id="@+id/action_waitingFragment_to_currentExerciseFragment"
+            app:destination="@id/currentExerciseFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/currentExerciseFragment"
+        android:name="com.example.myfitnessnote.ui.fragments.CurrentExerciseFragment"
+        android:label="fragment_current_exercise"
+        tools:layout="@layout/fragment_current_exercise" >
+        <action
+            android:id="@+id/action_currentExerciseFragment_to_dayFinalFragment"
+            app:destination="@id/dayFinalFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dayFinalFragment"
+        android:name="com.example.myfitnessnote.ui.fragments.DayFinalFragment"
+        android:label="fragment_day_final"
+        tools:layout="@layout/fragment_day_final" >
+        <action
+            android:id="@+id/action_dayFinalFragment_to_daysFragment"
+            app:destination="@id/daysFragment" />
+    </fragment>
 </navigation>
