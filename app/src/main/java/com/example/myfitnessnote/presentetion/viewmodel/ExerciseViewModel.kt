@@ -1,10 +1,11 @@
-package com.example.myfitnessnote.presentetion.vievmodel
+package com.example.myfitnessnote.presentetion.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myfitnessnote.domain.api.DaysInteractor
+import com.example.myfitnessnote.domain.models.ExerciseItem
 import com.example.myfitnessnote.domain.models.ExercisesListResult
 import com.example.myfitnessnote.presentetion.models.exercises.ExercisesIntent
 import com.example.myfitnessnote.presentetion.models.exercises.ExercisesScreenState
@@ -15,6 +16,8 @@ class ExerciseViewModel(private val interactor: DaysInteractor, private val dayI
     ViewModel() {
     private var _screenState: MediatorLiveData<ExercisesScreenState> = MediatorLiveData()
     val screenState: LiveData<ExercisesScreenState> = _screenState
+    private var counter = COUNTER_START
+    private var exerciseList: List<ExerciseItem> = emptyList()
 
     fun update(intent: ExercisesIntent) {
         when (intent) {
@@ -23,13 +26,29 @@ class ExerciseViewModel(private val interactor: DaysInteractor, private val dayI
                     getDaysList()
                 }
             }
+
+            is ExercisesIntent.UpdateCounter -> {
+                updateCounter()
+            }
+
         }
     }
 
-    private suspend fun getDaysList() {
-        when (val list = interactor.getDayExercises(dayId)) {
+    private fun updateCounter() {
+        counter++
+        _screenState.postValue(ExercisesScreenState.Content(exerciseList, counter))
+    }
+
+    private fun getDaysList() {
+        when (val result = interactor.getDayExercises(dayId)) {
             is ExercisesListResult.Content -> {
-                _screenState.postValue(ExercisesScreenState.Content(list.data))
+                exerciseList = result.data
+                _screenState.postValue(
+                    ExercisesScreenState.Content(
+                        data = result.data,
+                        counter = counter
+                    )
+                )
             }
 
             ExercisesListResult.ErrorState -> {
@@ -42,3 +61,5 @@ class ExerciseViewModel(private val interactor: DaysInteractor, private val dayI
         }
     }
 }
+
+private const val COUNTER_START = 0

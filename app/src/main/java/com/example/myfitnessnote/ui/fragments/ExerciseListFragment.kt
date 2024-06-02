@@ -1,9 +1,10 @@
-package com.example.myfitnessnote.ui.fragment
+package com.example.myfitnessnote.ui.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,17 +14,19 @@ import com.example.myfitnessnote.domain.models.ExerciseItem
 import com.example.myfitnessnote.presentetion.adapters.ExercisesAdapter
 import com.example.myfitnessnote.presentetion.models.exercises.ExercisesIntent
 import com.example.myfitnessnote.presentetion.models.exercises.ExercisesScreenState
-import com.example.myfitnessnote.presentetion.vievmodel.ExerciseViewModel
+import com.example.myfitnessnote.presentetion.viewmodel.ExerciseViewModel
 import com.example.myfitnessnote.utils.BindingFragment
+import com.example.myfitnessnote.utils.DAY_ID
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
 class ExerciseListFragment : BindingFragment<FragmentExerciseListBinding>() {
-    val dayId = arguments?.getInt(DAY_ID) ?: 0
+    private var dayId = 0
     private val viewModel: ExerciseViewModel by viewModel<ExerciseViewModel> {
-        parametersOf(dayId)
+        parametersOf(arguments?.getInt(DAY_ID) ?: 0)
     }
     private val adapter = ExercisesAdapter()
+    private val listExercises: ArrayList<ExerciseItem> = arrayListOf()
     override fun createBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
@@ -33,11 +36,15 @@ class ExerciseListFragment : BindingFragment<FragmentExerciseListBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        dayId = requireArguments().getInt(DAY_ID)
         with(binding) {
             tvExercisesList.layoutManager = LinearLayoutManager(requireContext())
             tvExercisesList.adapter = adapter
             botStart.setOnClickListener {
-                findNavController().navigate(R.id.action_exerciseListFragment_to_waitingFragment)
+                findNavController().navigate(
+                    R.id.action_exerciseListFragment_to_waitingFragment,
+                    bundleOf(DAY_ID to dayId)
+                )
             }
         }
         bind()
@@ -53,6 +60,8 @@ class ExerciseListFragment : BindingFragment<FragmentExerciseListBinding>() {
     private fun progressResult(result: ExercisesScreenState) {
         when (result) {
             is ExercisesScreenState.Content -> {
+                listExercises.clear()
+                listExercises.addAll(result.data)
                 showContent(result.data)
             }
 
@@ -86,9 +95,5 @@ class ExerciseListFragment : BindingFragment<FragmentExerciseListBinding>() {
         botStart.isVisible = true
         tvExercisesList.isVisible = true
         progressRequest.isVisible = false
-    }
-
-    companion object {
-        const val DAY_ID = "day_id"
     }
 }
