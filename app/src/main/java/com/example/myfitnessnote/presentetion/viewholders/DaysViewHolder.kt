@@ -13,5 +13,6 @@ class DaysViewHolder(private val rootBinding: DayItemBinding) :
             "${dayItem.exercisesIndexes.size} ${root.context.getString(R.string.exercise)}"
         tvDayCounter.text = exerciseCounter
         tvDayName.text = dayName
+        tvIsComplete .isChecked = dayItem.isComplete
     }
 }
