@@ -1,4 +1,4 @@
-package com.example.myfitnessnote.ui.fragment
+package com.example.myfitnessnote.ui.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -16,8 +16,9 @@ import com.example.myfitnessnote.presentetion.adapters.DaysAdapter
 import com.example.myfitnessnote.presentetion.models.days.DaysIntent
 import com.example.myfitnessnote.presentetion.models.days.DaysScreenData
 import com.example.myfitnessnote.presentetion.models.days.DaysScreenState
-import com.example.myfitnessnote.presentetion.vievmodel.DaysViewModel
+import com.example.myfitnessnote.presentetion.viewmodel.DaysViewModel
 import com.example.myfitnessnote.utils.BindingFragment
+import com.example.myfitnessnote.utils.DAY_ID
 import com.example.myfitnessnote.utils.debounce
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -88,7 +89,8 @@ class DaysFragment : BindingFragment<FragmentDaysBinding>() {
         tvError.isVisible = false
         daysAdapter.submitList(data.days)
         tvTextProgress.text = remainsDays
-        progressExercises.setProgress(data.progress, true)
+        tvProgressExercises.setProgress(data.progress, true)
+
     }
 
     private fun onDayClick() {
@@ -99,7 +101,7 @@ class DaysFragment : BindingFragment<FragmentDaysBinding>() {
         ) {
             findNavController().navigate(
                 R.id.action_daysFragment_to_exerciseListFragment,
-                bundleOf(ExerciseListFragment.DAY_ID to it.dayId)
+                bundleOf(DAY_ID to it.dayId)
             )
         }
     }
