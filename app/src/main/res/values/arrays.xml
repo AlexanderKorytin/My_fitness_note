@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="exercise">
-        <item>отдых|t:60|</item>                                       <!--0 -->
+        <item>отдых|t:60|relax.gif</item>                                       <!--0 -->
         <item>упражение на бицепс сидя|r:30|biceps.gif</item>         <!--1 -->
         <item>тяга гантели в наклоне к поясу|r:30|dumbbell.gif</item> <!--2 -->
         <item>сгибания лежа|r:30|flexion.gif</item>                   <!--3 -->
