@@ -18,4 +18,24 @@ fun map(dayItemDto: DayItemDto): DayItem {
     )
 }
 
+fun map(dayItem: DayItem): DayItemDto {
+    return DayItemDto(
+        dayId = dayItem.dayId,
+        exercises = getExercises(dayItem.exercisesIndexes),
+        isComplete = dayItem.isComplete
+    )
+}
+
+private fun getExercises(list: List<Int>): String {
+    val str = buildString {
+        list.forEachIndexed { index, item ->
+            append(item)
+            if (index < list.size - 1) {
+                append(DELIMITER)
+            }
+        }
+    }
+    return str
+}
+
 private const val DELIMITER = ','
