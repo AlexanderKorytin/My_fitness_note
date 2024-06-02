@@ -23,7 +23,7 @@
             android:textColor="@color/blue"
             android:textSize="20sp"
             android:textStyle="bold|italic"
-            app:layout_constraintEnd_toStartOf="@id/checkBox"
+            app:layout_constraintEnd_toStartOf="@id/tv_is_complete"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="День 1" />
@@ -36,13 +36,13 @@
             android:layout_weight="1"
             android:textColor="@color/red"
             android:textStyle="italic"
-            app:layout_constraintEnd_toStartOf="@id/checkBox"
+            app:layout_constraintEnd_toStartOf="@id/tv_is_complete"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_day_name"
             tools:text="13 упражнений" />
 
         <CheckBox
-            android:id="@+id/checkBox"
+            android:id="@+id/tv_is_complete"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:checked="false"
