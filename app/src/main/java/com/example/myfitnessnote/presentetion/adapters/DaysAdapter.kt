@@ -18,7 +18,7 @@ class DaysAdapter(private val onDayClick: (day: DayItem) -> Unit) : ListAdapter<
     override fun onBindViewHolder(holder: DaysViewHolder, position: Int) {
         holder.bind(currentList[position])
         holder.itemView.setOnClickListener {
-            onDayClick(currentList[position])
+            onDayClick(currentList[holder.adapterPosition])
         }
     }
 }
