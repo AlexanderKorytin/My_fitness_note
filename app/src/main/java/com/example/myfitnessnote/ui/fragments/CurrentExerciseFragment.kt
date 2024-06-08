@@ -48,6 +48,11 @@ class CurrentExerciseFragment : BindingFragment<FragmentCurrentExerciseBinding>(
         bind()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        job = null
+    }
+
     private fun bind() {
         viewModel.update(ExercisesIntent.RequestExercises)
         viewModel.screenState.observe(viewLifecycleOwner) {
@@ -148,6 +153,7 @@ class CurrentExerciseFragment : BindingFragment<FragmentCurrentExerciseBinding>(
         ).show()
     }
 }
+
 
 private const val FILE_PATH = "file://"
 private const val FILE_SEPARATOR = "/android_asset/"
