@@ -82,26 +82,27 @@ class CurrentExerciseFragment : BindingFragment<FragmentCurrentExerciseBinding>(
         }
     }
 
-    private fun showContent(list: List<ExerciseItem>, counter: Int) = with(binding) {
+    private fun showContent(exercisesList: List<ExerciseItem>, counter: Int) = with(binding) {
         tvContainerCurrentIcon.isVisible = true
         tvContainerProgress.isVisible = true
         tvContainerNext.isVisible = true
         butNextExercise.isVisible = true
         tvLoading.isVisible = false
-        if (counter < list.size) {
+        if (counter < exercisesList.size) {
+            tvExercisesCounter.text = "${counter+1} / ${exercisesList.size}"
             Glide.with(requireContext())
-                .load("${FILE_PATH}${FILE_SEPARATOR}${list[counter].icon}")
+                .load("${FILE_PATH}${FILE_SEPARATOR}${exercisesList[counter].icon}")
                 .placeholder(R.drawable.ic_cancel)
                 .centerCrop()
                 .into(tvCurrentIcon)
-            tvCurrentName.text = list[counter].name
-            tvNextName.text = list.getOrNull(counter + 1)?.name ?: DEFAULT_NAME
+            tvCurrentName.text = exercisesList[counter].name
+            tvNextName.text = exercisesList.getOrNull(counter + 1)?.name ?: DEFAULT_NAME
             Glide.with(requireContext())
-                .load("${FILE_PATH}${FILE_SEPARATOR}${list.getOrNull(counter + 1)?.icon}")
+                .load("${FILE_PATH}${FILE_SEPARATOR}${exercisesList.getOrNull(counter + 1)?.icon}")
                 .placeholder(R.drawable.ic_cancel)
                 .centerInside()
                 .into(tvNextIcon)
-            showDuration(list, counter)
+            showDuration(exercisesList, counter)
         } else {
             findNavController().navigate(
                 R.id.action_currentExerciseFragment_to_dayFinalFragment,
