@@ -13,4 +13,5 @@
     <string name="next">Следующее</string>
     <string name="congratulation">Поздравляем!\nВы выполнили все упражнения на день</string>
     <string name="ok">Ok</string>
+    <string name="error_loadin_exercise">Ошибка загрузки упражнения</string>
 </resources>

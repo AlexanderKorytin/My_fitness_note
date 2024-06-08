@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
@@ -66,16 +68,21 @@ class CurrentExerciseFragment : BindingFragment<FragmentCurrentExerciseBinding>(
             }
 
             is ExercisesScreenState.Loading -> {
-                //   showLoading()
+                showLoading()
             }
 
             is ExercisesScreenState.Error -> {
-                //    showError()
+                showError()
             }
         }
     }
 
     private fun showContent(list: List<ExerciseItem>, counter: Int) = with(binding) {
+        tvContainerCurrentIcon.isVisible = true
+        tvContainerProgress.isVisible = true
+        tvContainerNext.isVisible = true
+        butNextExercise.isVisible = true
+        tvLoading.isVisible = false
         if (counter < list.size) {
             Glide.with(requireContext())
                 .load("${FILE_PATH}${FILE_SEPARATOR}${list[counter].icon}")
@@ -118,6 +125,27 @@ class CurrentExerciseFragment : BindingFragment<FragmentCurrentExerciseBinding>(
 
     private fun getDuration(time: Int): Int {
         return time * TIME_CONVERTOR
+    }
+
+    private fun showLoading() = with(binding) {
+        tvContainerCurrentIcon.isVisible = false
+        tvContainerProgress.isVisible = false
+        tvContainerNext.isVisible = false
+        butNextExercise.isVisible = false
+        tvLoading.isVisible = true
+    }
+
+    private fun showError() = with(binding) {
+        tvContainerCurrentIcon.isVisible = false
+        tvContainerProgress.isVisible = false
+        tvContainerNext.isVisible = false
+        butNextExercise.isVisible = false
+        tvLoading.isVisible = false
+        Toast.makeText(
+            requireContext(),
+            requireContext().getString(R.string.error_loadin_exercise),
+            Toast.LENGTH_LONG
+        ).show()
     }
 }
 
