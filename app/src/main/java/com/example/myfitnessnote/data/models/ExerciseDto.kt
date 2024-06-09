@@ -6,7 +6,8 @@ import com.example.myfitnessnote.domain.models.ExerciseItem
 data class ExerciseDto(
     val exerciseName: String,
     val exerciseDuration: String,
-    val exerciseIcon: String
+    val exerciseIcon: String,
+    val isComplete: Boolean = false
 )
 
 
@@ -15,8 +16,29 @@ fun map(exerciseDto: ExerciseDto): ExerciseItem {
         name = exerciseDto.exerciseName,
         duration = exerciseDto.exerciseDuration.split(DURATION_DELIMITER).last().toInt(),
         durationLabel = getDurationLabel(exerciseDto.exerciseDuration.split(DURATION_DELIMITER)[0]),
-        icon = exerciseDto.exerciseIcon
+        icon = exerciseDto.exerciseIcon,
+        isComplete = exerciseDto.isComplete
     )
+}
+
+fun map(exercise: ExerciseItem): ExerciseDto {
+    return ExerciseDto(
+        exerciseName = exercise.name,
+        exerciseDuration = getExerciseDuration(exercise),
+        exerciseIcon = exercise.icon,
+        isComplete = exercise.isComplete
+    )
+}
+
+private fun getExerciseDuration(exercise: ExerciseItem): String {
+    val result = StringBuilder()
+    if (exercise.durationLabel == DurationLabel.TIME) {
+        result.append(TIME_LABEL)
+    } else {
+        result.append(REPLAY_LABEL)
+    }
+    result.append(DURATION_DELIMITER).append(exercise.duration)
+    return result.toString()
 }
 
 private fun getDurationLabel(prefix: String): DurationLabel {

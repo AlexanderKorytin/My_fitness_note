@@ -5,5 +5,5 @@ data class ExerciseItem(
     val duration: Int,
     val durationLabel: DurationLabel,
     val icon: String,
-    val isComplete: Boolean = false
+    val isComplete: Boolean
 )
