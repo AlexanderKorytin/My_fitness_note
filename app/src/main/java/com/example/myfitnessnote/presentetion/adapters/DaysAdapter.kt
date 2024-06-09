@@ -8,7 +8,8 @@ import com.example.myfitnessnote.databinding.DayItemBinding
 import com.example.myfitnessnote.domain.models.DayItem
 import com.example.myfitnessnote.presentetion.viewholders.DaysViewHolder
 
-class DaysAdapter(private val onDayClick: (day: DayItem) -> Unit) : ListAdapter<DayItem, DaysViewHolder>(DayItemDiffUtill()){
+class DaysAdapter(private val onDayClick: (day: DayItem) -> Unit) :
+    ListAdapter<DayItem, DaysViewHolder>(DayItemDiffUtill()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DaysViewHolder {
         val layoutInspector = LayoutInflater.from(parent.context)
         val viewBinding = DayItemBinding.inflate(layoutInspector, parent, false)
@@ -32,7 +33,7 @@ class DayItemDiffUtill : DiffUtil.ItemCallback<DayItem>() {
     override fun areContentsTheSame(oldItem: DayItem, newItem: DayItem): Boolean {
         return oldItem.dayId == newItem.dayId &&
                 oldItem.isComplete == newItem.isComplete &&
-                oldItem.exercisesIndexes.size == newItem.exercisesIndexes.size
+                oldItem.exercises.size == newItem.exercises.size
     }
 
 }

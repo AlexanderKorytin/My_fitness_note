@@ -89,7 +89,7 @@ class CurrentExerciseFragment : BindingFragment<FragmentCurrentExerciseBinding>(
         butNextExercise.isVisible = true
         tvLoading.isVisible = false
         if (counter < exercisesList.size) {
-            tvExercisesCounter.text = "${counter+1} / ${exercisesList.size}"
+            tvExercisesCounter.text = "${counter + 1} / ${exercisesList.size}"
             Glide.with(requireContext())
                 .load("${FILE_PATH}${FILE_SEPARATOR}${exercisesList[counter].icon}")
                 .placeholder(R.drawable.ic_cancel)
