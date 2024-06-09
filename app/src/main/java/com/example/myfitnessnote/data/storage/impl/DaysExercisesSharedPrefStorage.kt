@@ -47,17 +47,25 @@ data class DaysExercisesSharedPrefStorage(
     }
 
     private fun createDayList() {
-        val listDayDto = context.resources.getStringArray(R.array.days_execise)
+        val listDayDto = context.resources.getStringArray(R.array.days_exercises)
             .mapIndexed { index, item ->
-                DayItemDto(index, item)
+                DayItemDto(index, getDayListExercises(item.split(LIST_EXRCISES_DELIMITER)))
             }
         sharedPref.edit().putString(DAYS, json.toJson(listDayDto)).apply()
         sharedPref.edit().putBoolean(IS_FIRST_START, false).apply()
+    }
+
+    private fun getDayListExercises(list: List<String>): List<ExerciseDto> {
+        val result = mutableListOf<ExerciseDto>()
+        val listExercises = getListExercises()
+        list.forEach { result.add(listExercises[it.toInt()]) }
+        return result
     }
 
     companion object {
         const val IS_FIRST_START = "first_start"
         const val DAYS = "days"
         const val EXERCISE_DELIMITER = '|'
+        const val LIST_EXRCISES_DELIMITER = ','
     }
 }
