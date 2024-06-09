@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myfitnessnote.domain.api.DaysInteractor
 import com.example.myfitnessnote.domain.models.ExerciseItem
-import com.example.myfitnessnote.domain.models.ExercisesListResult
 import com.example.myfitnessnote.presentetion.models.exercises.ExercisesIntent
 import com.example.myfitnessnote.presentetion.models.exercises.ExercisesScreenState
 import kotlinx.coroutines.Dispatchers
@@ -35,30 +34,29 @@ class ExerciseViewModel(private val interactor: DaysInteractor, private val dayI
     }
 
     private fun updateCounter() {
+        val result = mutableListOf<ExerciseItem>()
+        exerciseList.forEachIndexed { index, exerciseItem ->
+            if (counter == index) {
+                result.add(exerciseItem.copy(isComplete = true))
+            } else {
+                result.add(exerciseItem)
+            }
+        }
+        interactor.saveDayExercisesList(exercises = result, dayId = dayId)
+        exerciseList = result
         counter++
         _screenState.postValue(ExercisesScreenState.Content(exerciseList, counter))
     }
 
     private fun getDaysList() {
-        when (val result = interactor.getDayExercises(dayId)) {
-            is ExercisesListResult.Content -> {
-                exerciseList = result.data
-                _screenState.postValue(
-                    ExercisesScreenState.Content(
-                        data = result.data,
-                        counter = counter
-                    )
-                )
-            }
-
-            ExercisesListResult.ErrorState -> {
-                _screenState.postValue(ExercisesScreenState.Error)
-            }
-
-            ExercisesListResult.ErrorUnKnow -> {
-                _screenState.postValue(ExercisesScreenState.Error)
-            }
-        }
+        val result = interactor.getDayExercises(dayId)
+        exerciseList = result
+        _screenState.postValue(
+            ExercisesScreenState.Content(
+                data = result,
+                counter = counter
+            )
+        )
     }
 }
 

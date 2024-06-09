@@ -4,7 +4,6 @@ import com.example.myfitnessnote.domain.api.DaysInteractor
 import com.example.myfitnessnote.domain.api.DaysRepository
 import com.example.myfitnessnote.domain.models.DayItem
 import com.example.myfitnessnote.domain.models.ExerciseItem
-import com.example.myfitnessnote.domain.models.ExercisesListResult
 
 class DaysInteractorImpl(private val repository: DaysRepository) : DaysInteractor {
     override fun getDayList(): List<DayItem> {
@@ -15,33 +14,21 @@ class DaysInteractorImpl(private val repository: DaysRepository) : DaysInteracto
         repository.saveDayList(dayList)
     }
 
-    override fun getDayExercises(dayId: Int): ExercisesListResult {
+    override fun saveDayExercisesList(exercises: List<ExerciseItem>, dayId: Int) {
         val listDays = getDayList()
-        val data = repository.getAllExercises().getOrNull()
-        val error = repository.getAllExercises().exceptionOrNull()
-        val result = when {
-            data != null -> {
-                val listDayExercises = mutableListOf<ExerciseItem>()
-                listDays[dayId].exercisesIndexes.forEach {
-                    val currentExercise = try {
-                        data[it]
-                    } catch (e: IndexOutOfBoundsException) {
-                        data[0]
-                    }
-                    listDayExercises.add(currentExercise)
-                }
-                ExercisesListResult.Content(listDayExercises)
-            }
-
-            error is IllegalStateException -> {
-                ExercisesListResult.ErrorState
-            }
-
-
-            else -> {
-                ExercisesListResult.ErrorUnKnow
+        val result = mutableListOf<DayItem>()
+        listDays.forEach {
+            if (it.dayId == dayId) {
+                result.add(it.copy(exercises = exercises))
+            } else {
+                result.add(it)
             }
         }
-        return result
+        saveDayList(result)
+    }
+
+    override fun getDayExercises(dayId: Int): List<ExerciseItem> {
+        val listDays = getDayList()
+        return listDays[dayId].exercises
     }
 }
