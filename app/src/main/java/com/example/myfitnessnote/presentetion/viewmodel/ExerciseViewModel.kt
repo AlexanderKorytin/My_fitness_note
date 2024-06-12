@@ -50,6 +50,9 @@ class ExerciseViewModel(private val interactor: DaysInteractor, private val dayI
 
     private fun getDaysList() {
         val result = interactor.getDayExercises(dayId)
+        var count = 0
+        result.forEach { if (it.isComplete) ++count }
+        counter = count
         exerciseList = result
         _screenState.postValue(
             ExercisesScreenState.Content(
