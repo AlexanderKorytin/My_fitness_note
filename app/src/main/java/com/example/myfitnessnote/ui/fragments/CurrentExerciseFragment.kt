@@ -149,7 +149,7 @@ class CurrentExerciseFragment : BindingFragment<FragmentCurrentExerciseBinding>(
         tvLoading.isVisible = false
         Toast.makeText(
             requireContext(),
-            requireContext().getString(R.string.error_loadin_exercise),
+            requireContext().getString(R.string.error_loading_exercise),
             Toast.LENGTH_LONG
         ).show()
     }
