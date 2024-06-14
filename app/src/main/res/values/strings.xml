@@ -13,5 +13,9 @@
     <string name="next">Следующее</string>
     <string name="congratulation">Поздравляем!\nВы выполнили все упражнения на день</string>
     <string name="ok">Ok</string>
-    <string name="error_loadin_exercise">Ошибка загрузки упражнения</string>
+    <string name="error_loading_exercise">Ошибка загрузки упражнения</string>
+    <string name="repeat_day">начать сначала</string>
+    <string name="resume_day">продолжить</string>
+    <string name="yes">да</string>
+    <string name="no">нет</string>
 </resources>
