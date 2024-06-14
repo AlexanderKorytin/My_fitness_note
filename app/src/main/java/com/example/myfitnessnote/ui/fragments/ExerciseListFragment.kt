@@ -17,6 +17,7 @@ import com.example.myfitnessnote.presentetion.models.exercises.ExercisesScreenSt
 import com.example.myfitnessnote.presentetion.viewmodel.ExerciseViewModel
 import com.example.myfitnessnote.utils.BindingFragment
 import com.example.myfitnessnote.utils.DAY_ID
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
@@ -27,6 +28,8 @@ class ExerciseListFragment : BindingFragment<FragmentExerciseListBinding>() {
     }
     private val adapter = ExercisesAdapter()
     private val listExercises: ArrayList<ExerciseItem> = arrayListOf()
+    private var isDialogShow = false
+
     override fun createBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
@@ -41,15 +44,36 @@ class ExerciseListFragment : BindingFragment<FragmentExerciseListBinding>() {
             tvExercisesList.layoutManager = LinearLayoutManager(requireContext())
             tvExercisesList.adapter = adapter
             botStart.setOnClickListener {
-                findNavController().navigate(
-                    R.id.action_exerciseListFragment_to_waitingFragment,
-                    bundleOf(DAY_ID to dayId)
-                )
+                navigateToWaitingFragment(dayId)
             }
         }
         bind()
     }
 
+    private fun navigateToWaitingFragment(dayId: Int) {
+        if (isDialogShow){
+            MaterialAlertDialogBuilder(requireContext())
+                .setCancelable(false)
+                .setNegativeButton(R.string.resume_day) { _, _ ->
+                    findNavController().navigate(
+                        R.id.action_exerciseListFragment_to_waitingFragment,
+                        bundleOf(DAY_ID to dayId)
+                    )
+                }
+                .setPositiveButton(R.string.repeat_day) { _, _ ->
+                    viewModel.update(ExercisesIntent.RepeatDay)
+                    findNavController().navigate(
+                        R.id.action_exerciseListFragment_to_waitingFragment,
+                        bundleOf(DAY_ID to dayId)
+                    )
+                }.show()
+        } else {
+            findNavController().navigate(
+                R.id.action_exerciseListFragment_to_waitingFragment,
+                bundleOf(DAY_ID to dayId)
+            )
+        }
+    }
     private fun bind() {
         viewModel.update(ExercisesIntent.RequestExercises)
         viewModel.screenState.observe(viewLifecycleOwner) {
@@ -62,6 +86,7 @@ class ExerciseListFragment : BindingFragment<FragmentExerciseListBinding>() {
             is ExercisesScreenState.Content -> {
                 listExercises.clear()
                 listExercises.addAll(result.data)
+                listExercises.forEach { if (it.isComplete) isDialogShow = true }
                 showContent(result.data)
             }
 

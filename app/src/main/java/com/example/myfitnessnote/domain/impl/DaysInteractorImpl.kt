@@ -31,4 +31,21 @@ class DaysInteractorImpl(private val repository: DaysRepository) : DaysInteracto
         val listDays = getDayList()
         return listDays[dayId].exercises
     }
+
+    override fun repeatDayExercise(dayId: Int) {
+        val listDays = getDayList()
+        val newDayList = mutableListOf<DayItem>()
+        val newExercises = mutableListOf<ExerciseItem>()
+        listDays.forEach { dayItem ->
+            if (dayItem.dayId == dayId) {
+                dayItem.exercises.forEach { exerciseItem ->
+                    newExercises.add(exerciseItem.copy(isComplete = false))
+                }
+                newDayList.add(dayItem.copy(isComplete = false, exercises = newExercises))
+            } else {
+                newDayList.add(dayItem)
+            }
+        }
+        saveDayList(newDayList)
+    }
 }

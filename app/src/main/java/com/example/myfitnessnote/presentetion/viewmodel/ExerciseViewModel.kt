@@ -30,7 +30,14 @@ class ExerciseViewModel(private val interactor: DaysInteractor, private val dayI
                 updateCounter()
             }
 
+            ExercisesIntent.RepeatDay -> {
+                repeatDay()
+            }
         }
+    }
+
+    private fun repeatDay() {
+        interactor.repeatDayExercise(dayId = dayId)
     }
 
     private fun updateCounter() {
