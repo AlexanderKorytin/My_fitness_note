@@ -51,7 +51,7 @@ class ExerciseListFragment : BindingFragment<FragmentExerciseListBinding>() {
     }
 
     private fun navigateToWaitingFragment(dayId: Int) {
-        if (isDialogShow){
+        if (isDialogShow) {
             MaterialAlertDialogBuilder(requireContext())
                 .setCancelable(false)
                 .setNegativeButton(R.string.resume_day) { _, _ ->
@@ -74,6 +74,7 @@ class ExerciseListFragment : BindingFragment<FragmentExerciseListBinding>() {
             )
         }
     }
+
     private fun bind() {
         viewModel.update(ExercisesIntent.RequestExercises)
         viewModel.screenState.observe(viewLifecycleOwner) {
