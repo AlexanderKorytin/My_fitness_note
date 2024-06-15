@@ -33,7 +33,14 @@ class DayItemDiffUtill : DiffUtil.ItemCallback<DayItem>() {
     override fun areContentsTheSame(oldItem: DayItem, newItem: DayItem): Boolean {
         return oldItem.dayId == newItem.dayId &&
                 oldItem.isComplete == newItem.isComplete &&
-                oldItem.exercises.size == newItem.exercises.size
+                oldItem.exercises.size == newItem.exercises.size &&
+                compareCompletingExercise(oldItem, newItem)
     }
 
+    private fun compareCompletingExercise(oldItem: DayItem, newItem: DayItem): Boolean {
+        for (i in 0 until oldItem.exercises.size) {
+            if (oldItem.exercises[i].isComplete != newItem.exercises[i].isComplete) return false
+        }
+        return true
+    }
 }
