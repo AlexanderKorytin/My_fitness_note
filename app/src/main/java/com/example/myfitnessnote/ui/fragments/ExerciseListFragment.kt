@@ -92,7 +92,7 @@ class ExerciseListFragment : BindingFragment<FragmentExerciseListBinding>() {
                 listExercises.forEach { if (it.isComplete) completeExerciseCount++ }
                 isDialogShow =
                     completeExerciseCount > 0 && completeExerciseCount != result.data.size
-                showContent(result.data)
+                showContent(result.data, completeExerciseCount == result.data.size)
             }
 
             is ExercisesScreenState.Loading -> {
@@ -119,11 +119,16 @@ class ExerciseListFragment : BindingFragment<FragmentExerciseListBinding>() {
         progressRequest.isVisible = false
     }
 
-    private fun showContent(data: List<ExerciseItem>) = with(binding) {
+    private fun showContent(data: List<ExerciseItem>, dayIsComplete: Boolean) = with(binding) {
         adapter.submitList(data)
         tvError.isVisible = false
         botStart.isVisible = true
         tvExercisesList.isVisible = true
         progressRequest.isVisible = false
+        botStart.text = if (dayIsComplete) {
+            getString(R.string.repeat_day)
+        } else {
+            getString(R.string.start)
+        }
     }
 }
