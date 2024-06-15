@@ -68,6 +68,7 @@ class ExerciseListFragment : BindingFragment<FragmentExerciseListBinding>() {
                     )
                 }.show()
         } else {
+            viewModel.update(ExercisesIntent.RepeatDay)
             findNavController().navigate(
                 R.id.action_exerciseListFragment_to_waitingFragment,
                 bundleOf(DAY_ID to dayId)
@@ -85,9 +86,12 @@ class ExerciseListFragment : BindingFragment<FragmentExerciseListBinding>() {
     private fun progressResult(result: ExercisesScreenState) {
         when (result) {
             is ExercisesScreenState.Content -> {
+                var completeExerciseCount = 0
                 listExercises.clear()
                 listExercises.addAll(result.data)
-                listExercises.forEach { if (it.isComplete) isDialogShow = true }
+                listExercises.forEach { if (it.isComplete) completeExerciseCount++ }
+                isDialogShow =
+                    completeExerciseCount > 0 && completeExerciseCount != result.data.size
                 showContent(result.data)
             }
 
