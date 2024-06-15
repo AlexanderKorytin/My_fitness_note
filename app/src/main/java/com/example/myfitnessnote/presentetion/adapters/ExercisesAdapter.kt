@@ -29,7 +29,8 @@ class ExerciseDiffUtil : DiffUtil.ItemCallback<ExerciseItem>() {
     override fun areContentsTheSame(oldItem: ExerciseItem, newItem: ExerciseItem): Boolean {
         return oldItem.name == newItem.name &&
                 oldItem.duration == newItem.duration &&
-                oldItem.icon == newItem.icon
+                oldItem.icon == newItem.icon &&
+                oldItem.isComplete == newItem.isComplete
     }
 
 }
