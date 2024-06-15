@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.addCallback
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
@@ -28,6 +30,7 @@ import org.koin.core.parameter.parametersOf
 
 class CurrentExerciseFragment : BindingFragment<FragmentCurrentExerciseBinding>() {
     private var dayId = 0
+    private var backCallBack: OnBackPressedCallback? = null
     private val viewModel: ExerciseViewModel by viewModel<ExerciseViewModel> {
         parametersOf(
             arguments?.getInt(DAY_ID) ?: 0
@@ -45,11 +48,15 @@ class CurrentExerciseFragment : BindingFragment<FragmentCurrentExerciseBinding>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         dayId = requireArguments().getInt(DAY_ID)
+        backCallBack = requireActivity().onBackPressedDispatcher.addCallback {
+            findNavController().popBackStack(R.id.exerciseListFragment, false)
+        }
         bind()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView() {
+        super.onDestroyView()
+        backCallBack?.remove()
         job = null
     }
 
