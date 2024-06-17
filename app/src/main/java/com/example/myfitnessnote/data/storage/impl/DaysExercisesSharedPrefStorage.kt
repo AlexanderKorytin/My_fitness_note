@@ -40,16 +40,7 @@ data class DaysExercisesSharedPrefStorage(
     }
 
     override fun resetDayList() {
-        val dayList = getDayListFromSharedPref()
-        val newDayList = mutableListOf<DayItemDto>()
-        dayList.forEach { dayIten ->
-            val newExercisesList = mutableListOf<ExerciseDto>()
-            dayIten.exercises.forEach { exerciseItem ->
-                newExercisesList.add(exerciseItem.copy(isComplete = false))
-            }
-            newDayList.add(dayIten.copy(isComplete = false, exercises = newExercisesList))
-        }
-        updateDayList(newDayList)
+        sharedPref.edit().clear().apply()
     }
 
     private fun getDayListFromSharedPref(): List<DayItemDto> {
