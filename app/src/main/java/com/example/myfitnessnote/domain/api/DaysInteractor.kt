@@ -9,5 +9,6 @@ interface DaysInteractor {
     fun saveDayExercisesList(exercises: List<ExerciseItem>, dayId: Int)
     fun getDayExercises(dayId: Int): List<ExerciseItem>
     fun repeatDayExercise(dayId: Int)
+    fun resetDayList()
 
 }

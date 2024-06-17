@@ -2,8 +2,11 @@ package com.example.myfitnessnote.ui.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
@@ -30,6 +33,8 @@ class DaysFragment : BindingFragment<FragmentDaysBinding>() {
     private var dayClickDebounce: ((DayItem) -> Unit)? = null
 
     private val viewModel: DaysViewModel by viewModel<DaysViewModel>()
+
+
     override fun createBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
@@ -40,6 +45,9 @@ class DaysFragment : BindingFragment<FragmentDaysBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         onDayClick()
+        binding.butMenu.setOnClickListener{
+            onMenuClick(it)
+        }
         bind()
     }
 
@@ -104,6 +112,24 @@ class DaysFragment : BindingFragment<FragmentDaysBinding>() {
                 bundleOf(DAY_ID to it.dayId)
             )
         }
+    }
+
+    private fun onMenuClick(view: View){
+        val popup = PopupMenu(requireContext(), view)
+        val inflater = popup.menuInflater
+        inflater.inflate(R.menu.days_fragment_menu, popup.menu)
+        popup.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.menu_item_reset -> {
+                    viewModel.update(DaysIntent.Reset)
+                    true
+                }
+                else -> {
+                    false
+                }
+            }
+        }
+        popup.show()
     }
 
     companion object {

@@ -26,6 +26,13 @@ class DaysViewModel(private val interactor: DaysInteractor) : ViewModel() {
                     getDaysList()
                 }
             }
+
+            DaysIntent.Reset -> {
+                viewModelScope.launch(Dispatchers.IO) {
+                    reset()
+                    getDaysList()
+                }
+            }
         }
     }
 
@@ -58,6 +65,10 @@ class DaysViewModel(private val interactor: DaysInteractor) : ViewModel() {
         var progress = 0
         list.forEach { if (it.isComplete) progress++ }
         return (progress.toDouble() / list.size.toDouble()).toPercent()
+    }
+
+    private fun reset() {
+        interactor.resetDayList()
     }
 
     companion object {

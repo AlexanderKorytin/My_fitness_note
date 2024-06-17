@@ -48,4 +48,8 @@ class DaysInteractorImpl(private val repository: DaysRepository) : DaysInteracto
         }
         saveDayList(newDayList)
     }
+
+    override fun resetDayList() {
+        repository.resetDayList()
+    }
 }

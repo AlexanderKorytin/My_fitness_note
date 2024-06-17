@@ -18,4 +18,5 @@
     <string name="resume_day">продолжить</string>
     <string name="yes">да</string>
     <string name="no">нет</string>
+    <string name="reset">очистить результаты</string>
 </resources>

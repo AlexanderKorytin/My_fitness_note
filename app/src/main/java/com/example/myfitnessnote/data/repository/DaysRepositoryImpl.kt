@@ -27,4 +27,9 @@ class DaysRepositoryImpl(private val storage: DaysExercisesStorage) : DaysReposi
         }
         return result
     }
+
+    override fun resetDayList() {
+        storage.resetDayList()
+    }
+
 }

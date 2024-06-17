@@ -39,6 +39,19 @@ data class DaysExercisesSharedPrefStorage(
         sharedPref.edit().putString(DAYS, json.toJson(dayList)).apply()
     }
 
+    override fun resetDayList() {
+        val dayList = getDayListFromSharedPref()
+        val newDayList = mutableListOf<DayItemDto>()
+        dayList.forEach { dayIten ->
+            val newExercisesList = mutableListOf<ExerciseDto>()
+            dayIten.exercises.forEach { exerciseItem ->
+                newExercisesList.add(exerciseItem.copy(isComplete = false))
+            }
+            newDayList.add(dayIten.copy(isComplete = false, exercises = newExercisesList))
+        }
+        updateDayList(newDayList)
+    }
+
     private fun getDayListFromSharedPref(): List<DayItemDto> {
         return json.fromJson(
             sharedPref.getString(DAYS, json.toJson(emptyList<DayItemDto>())),
