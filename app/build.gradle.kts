@@ -1,7 +1,9 @@
+
+
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
-    alias(libs.plugins.org.jetbrains.kotlin.kapt)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -27,7 +29,6 @@ android {
             )
         }
     }
-
     buildFeatures {
         viewBinding = true
     }
@@ -41,7 +42,8 @@ android {
 }
 
 dependencies {
-
+    ksp(libs.room.annotation.processor)
+    implementation(libs.room)
     implementation(libs.glide)
     implementation(libs.gson)
     implementation(libs.koin)
