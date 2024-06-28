@@ -3,6 +3,7 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    alias(libs.plugins.org.jetbrains.kotlin.kapt)
     alias(libs.plugins.ksp)
 }
 
@@ -43,6 +44,8 @@ android {
 
 dependencies {
     ksp(libs.room.annotation.processor)
+    implementation(libs.mp.android.chart)
+    implementation(libs.calendar)
     implementation(libs.room)
     implementation(libs.glide)
     implementation(libs.gson)
