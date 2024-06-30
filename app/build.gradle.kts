@@ -44,6 +44,7 @@ android {
 
 dependencies {
     ksp(libs.room.annotation.processor)
+    implementation(libs.room.ktx)
     implementation(libs.mp.android.chart)
     implementation(libs.calendar)
     implementation(libs.room)

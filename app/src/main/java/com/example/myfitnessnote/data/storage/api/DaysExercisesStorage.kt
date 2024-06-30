@@ -1,7 +1,7 @@
 package com.example.myfitnessnote.data.storage.api
 
-import com.example.myfitnessnote.data.models.DayItemDto
-import com.example.myfitnessnote.data.models.ExerciseDto
+import com.example.myfitnessnote.data.db.entity.models.DayItemDto
+import com.example.myfitnessnote.data.db.entity.models.ExerciseDto
 
 interface DaysExercisesStorage {
     fun getDayList(): List<DayItemDto>

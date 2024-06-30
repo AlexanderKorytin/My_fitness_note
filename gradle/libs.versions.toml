@@ -29,6 +29,7 @@ mp_android_chart_version = "3.1.0"
 calendar = { group = "com.applandeo", name = "material-calendar-view", version.ref = "calendar_version" }
 mp-android-chart = { group = "com.github.PhilJay", name = "MPAndroidChart", version.ref = "mp_android_chart_version" }
 room = { group = "androidx.room", name = "room-runtime", version.ref = "room_version" }
+room-ktx = {group = "androidx.room", name = "room-ktx", version.ref ="room_version"}
 room-annotation-processor = { group = "androidx.room", name = "room-compiler", version.ref = "room_version" }
 glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide_version" }
 gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson_version" }

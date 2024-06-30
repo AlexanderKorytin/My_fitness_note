@@ -3,8 +3,9 @@ package com.example.myfitnessnote.data.storage.impl
 import android.content.Context
 import android.content.SharedPreferences
 import com.example.myfitnessnote.R
-import com.example.myfitnessnote.data.models.DayItemDto
-import com.example.myfitnessnote.data.models.ExerciseDto
+import com.example.myfitnessnote.data.db.AppDataBase
+import com.example.myfitnessnote.data.db.entity.models.DayItemDto
+import com.example.myfitnessnote.data.db.entity.models.ExerciseDto
 import com.example.myfitnessnote.data.storage.api.DaysExercisesStorage
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -12,7 +13,8 @@ import com.google.gson.reflect.TypeToken
 data class DaysExercisesSharedPrefStorage(
     private val context: Context,
     private val sharedPref: SharedPreferences,
-    private val json: Gson
+    private val json: Gson,
+    private val dataBase: AppDataBase
 ) : DaysExercisesStorage {
     private var isFirstStart: Boolean = true
 
@@ -28,9 +30,11 @@ data class DaysExercisesSharedPrefStorage(
         return context.resources.getStringArray(R.array.exercise).map {
             val currentExercise = it.split(EXERCISE_DELIMITER)
             ExerciseDto(
-                currentExercise[0],
-                currentExercise[1],
-                currentExercise[2]
+                exerciseName = currentExercise[0],
+                exerciseDuration = currentExercise[1],
+                subTitle = currentExercise[0], // времянка
+                exerciseIcon = currentExercise[2],
+                kCal = 0 // времянка
             )
         }
     }
@@ -53,23 +57,26 @@ data class DaysExercisesSharedPrefStorage(
     private fun createDayList() {
         val listDayDto = context.resources.getStringArray(R.array.days_exercises)
             .mapIndexed { index, item ->
-                DayItemDto(index, getDayListExercises(item.split(LIST_EXRCISES_DELIMITER)))
+                DayItemDto(
+                    dayNumber = index,
+                    exercises = getDayListExercises(item.split(LIST_EXERCISES_DELIMITER))
+                )
             }
         sharedPref.edit().putString(DAYS, json.toJson(listDayDto)).apply()
         sharedPref.edit().putBoolean(IS_FIRST_START, false).apply()
     }
 
-    private fun getDayListExercises(list: List<String>): List<ExerciseDto> {
+    private fun getDayListExercises(list: List<String>): String {
         val result = mutableListOf<ExerciseDto>()
         val listExercises = getListExercises()
         list.forEach { result.add(listExercises[it.toInt()]) }
-        return result
+        return json.toJson(result, object : TypeToken<List<ExerciseDto>>() {}.type)
     }
 
     companion object {
         const val IS_FIRST_START = "first_start"
         const val DAYS = "days"
         const val EXERCISE_DELIMITER = '|'
-        const val LIST_EXRCISES_DELIMITER = ','
+        const val LIST_EXERCISES_DELIMITER = ','
     }
 }
