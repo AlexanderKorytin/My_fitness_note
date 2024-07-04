@@ -96,9 +96,6 @@ class DaysFragment : BindingFragment<FragmentDaysBinding>() {
         progressRequest.isVisible = false
         tvError.isVisible = false
         daysAdapter.submitList(data.days)
-     //   tvTextProgress.text = remainsDays
-    //    tvProgressExercises.setProgress(data.progress, true)
-
     }
 
     private fun onDayClick() {
