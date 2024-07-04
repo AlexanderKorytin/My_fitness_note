@@ -3,22 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_graph"
-    app:startDestination="@id/daysFragment">
+    app:startDestination="@id/trainingFragment">
 
-    <fragment
-        android:id="@+id/daysFragment"
-        android:name="com.example.myfitnessnote.ui.fragments.DaysFragment"
-        android:label="fragment_days"
-        tools:layout="@layout/fragment_days" >
-        <action
-            android:id="@+id/action_daysFragment_to_exerciseListFragment"
-            app:destination="@id/exerciseListFragment" />
-    </fragment>
     <fragment
         android:id="@+id/exerciseListFragment"
         android:name="com.example.myfitnessnote.ui.fragments.ExerciseListFragment"
         android:label="fragment_exercise_list"
-        tools:layout="@layout/fragment_exercise_list" >
+        tools:layout="@layout/fragment_exercise_list">
         <action
             android:id="@+id/action_exerciseListFragment_to_waitingFragment"
             app:destination="@id/waitingFragment" />
@@ -27,7 +18,7 @@
         android:id="@+id/waitingFragment"
         android:name="com.example.myfitnessnote.ui.fragments.WaitingFragment"
         android:label="fragment_waiting"
-        tools:layout="@layout/fragment_waiting" >
+        tools:layout="@layout/fragment_waiting">
         <action
             android:id="@+id/action_waitingFragment_to_currentExerciseFragment"
             app:destination="@id/currentExerciseFragment" />
@@ -36,7 +27,7 @@
         android:id="@+id/currentExerciseFragment"
         android:name="com.example.myfitnessnote.ui.fragments.CurrentExerciseFragment"
         android:label="fragment_current_exercise"
-        tools:layout="@layout/fragment_current_exercise" >
+        tools:layout="@layout/fragment_current_exercise">
         <action
             android:id="@+id/action_currentExerciseFragment_to_dayFinalFragment"
             app:destination="@id/dayFinalFragment" />
@@ -45,9 +36,18 @@
         android:id="@+id/dayFinalFragment"
         android:name="com.example.myfitnessnote.ui.fragments.DayFinalFragment"
         android:label="fragment_day_final"
-        tools:layout="@layout/fragment_day_final" >
+        tools:layout="@layout/fragment_day_final">
         <action
-            android:id="@+id/action_dayFinalFragment_to_daysFragment"
-            app:destination="@id/daysFragment" />
+            android:id="@+id/action_dayFinalFragment_to_trainingFragment"
+            app:destination="@id/trainingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/trainingFragment"
+        android:name="com.example.myfitnessnote.ui.fragments.training.TrainingFragment"
+        android:label="fragment_training"
+        tools:layout="@layout/fragment_training">
+        <action
+            android:id="@+id/action_trainingFragment_to_exerciseListFragment"
+            app:destination="@id/exerciseListFragment" />
     </fragment>
 </navigation>
