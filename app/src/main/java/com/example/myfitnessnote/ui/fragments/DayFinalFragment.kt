@@ -35,7 +35,7 @@ class DayFinalFragment : BindingFragment<FragmentDayFinalBinding>() {
         bind()
         dayId = requireArguments().getInt(DAY_ID)
         binding.butReturnToDaysList.setOnClickListener {
-            findNavController().navigate(R.id.action_dayFinalFragment_to_daysFragment)
+            findNavController().navigate(R.id.action_dayFinalFragment_to_trainingFragment)
         }
     }
 

@@ -1,9 +1,7 @@
-package com.example.myfitnessnote.ui.fragments
+package com.example.myfitnessnote.ui.fragments.days
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
@@ -15,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myfitnessnote.R
 import com.example.myfitnessnote.databinding.FragmentDaysBinding
 import com.example.myfitnessnote.domain.models.DayItem
+import com.example.myfitnessnote.domain.models.Difficulty
 import com.example.myfitnessnote.presentetion.adapters.DaysAdapter
 import com.example.myfitnessnote.presentetion.models.days.DaysIntent
 import com.example.myfitnessnote.presentetion.models.days.DaysScreenData
@@ -44,6 +43,7 @@ class DaysFragment : BindingFragment<FragmentDaysBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val difficulty = arguments?.getString(DIFFICULTY)
         onDayClick()
         binding.butMenu.setOnClickListener{
             onMenuClick(it)
@@ -96,8 +96,8 @@ class DaysFragment : BindingFragment<FragmentDaysBinding>() {
         progressRequest.isVisible = false
         tvError.isVisible = false
         daysAdapter.submitList(data.days)
-        tvTextProgress.text = remainsDays
-        tvProgressExercises.setProgress(data.progress, true)
+     //   tvTextProgress.text = remainsDays
+    //    tvProgressExercises.setProgress(data.progress, true)
 
     }
 
@@ -108,7 +108,7 @@ class DaysFragment : BindingFragment<FragmentDaysBinding>() {
             false
         ) {
             findNavController().navigate(
-                R.id.action_daysFragment_to_exerciseListFragment,
+                R.id.action_trainingFragment_to_exerciseListFragment,
                 bundleOf(DAY_ID to it.dayId)
             )
         }
@@ -134,5 +134,9 @@ class DaysFragment : BindingFragment<FragmentDaysBinding>() {
 
     companion object {
         private const val DELAY_DAY_CLICK = 300L
+        private const val DIFFICULTY = "difficulty"
+        fun newInstance(difficulty: Difficulty) = DaysFragment().apply {
+            arguments = bundleOf(DIFFICULTY to difficulty.name)
+        }
     }
 }
