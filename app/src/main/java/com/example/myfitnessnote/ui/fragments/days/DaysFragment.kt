@@ -91,7 +91,6 @@ class DaysFragment : BindingFragment<FragmentDaysBinding>() {
     }
 
     private fun showContent(data: DaysScreenData) = with(binding) {
-        val remainsDays = "${requireContext().getString(R.string.remains_days)} ${data.remainsDays}"
         daysList.isVisible = true
         progressRequest.isVisible = false
         tvError.isVisible = false
