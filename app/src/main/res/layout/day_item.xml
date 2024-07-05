@@ -5,15 +5,18 @@
     android:id="@+id/cardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginHorizontal="4dp"
     android:layout_marginTop="8dp"
+    app:cardBackgroundColor="@color/gray"
     app:cardCornerRadius="12dp"
-    app:cardElevation="8dp">
+    app:cardElevation="4dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginHorizontal="16dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingVertical="8dp">
 
         <TextView
             android:id="@+id/tv_day_name"
@@ -23,7 +26,7 @@
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold|italic"
-            app:layout_constraintEnd_toStartOf="@id/tv_is_complete"
+            app:layout_constraintEnd_toStartOf="@id/tv_ic_complete"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="День 1" />
@@ -32,23 +35,19 @@
             android:id="@+id/tv_day_counter"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="8dp"
             android:layout_weight="1"
             android:textColor="@color/blue"
             android:textStyle="italic"
-            app:layout_constraintEnd_toStartOf="@id/tv_is_complete"
+            app:layout_constraintEnd_toStartOf="@id/tv_ic_complete"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_day_name"
             tools:text="13 упражнений" />
 
-        <CheckBox
-            android:id="@+id/tv_is_complete"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:checked="false"
-            android:clickable="false"
-            android:elevation="8dp"
-            android:focusable="auto"
+        <ImageView
+            android:id="@+id/tv_ic_complete"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
