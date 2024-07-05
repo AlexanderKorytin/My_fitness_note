@@ -13,9 +13,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class DaysViewModel(private val interactor: DaysInteractor) : ViewModel() {
+open class DaysViewModel(protected open val interactor: DaysInteractor) : ViewModel() {
 
-    private val _daysScreenState: MediatorLiveData<DaysScreenState> =
+    protected val _daysScreenState: MediatorLiveData<DaysScreenState> =
         MediatorLiveData(DaysScreenState.Loading)
 
     val daysScreenState: LiveData<DaysScreenState> = _daysScreenState
@@ -36,7 +36,7 @@ class DaysViewModel(private val interactor: DaysInteractor) : ViewModel() {
         }
     }
 
-    private suspend fun getDaysList() {
+    protected suspend fun getDaysList() {
         try {
             val list = interactor.getDayList()
             _daysScreenState.postValue(
@@ -55,29 +55,28 @@ class DaysViewModel(private val interactor: DaysInteractor) : ViewModel() {
         }
     }
 
-    private fun getRemainsDays(list: List<DayItem>): Int {
+    protected fun getRemainsDays(list: List<DayItem>): Int {
         var counter = list.size
         list.forEach { if (it.isComplete) counter-- }
         return counter
     }
 
-    private fun getProgress(list: List<DayItem>): Int {
+    protected fun getProgress(list: List<DayItem>): Int {
         var progress = 0
         list.forEach { if (it.isComplete) progress++ }
         return (progress.toDouble() / list.size.toDouble()).toPercent()
     }
 
-    private fun reset() {
+    protected fun reset() {
         interactor.resetDayList()
+    }
+
+    protected fun Double.toPercent(): Int {
+        return (this * TO_PERCENT).toInt()
     }
 
     companion object {
         private const val DELAY_REQUEST_LIST = 1000L
+        private const val TO_PERCENT = 100
     }
 }
-
-private fun Double.toPercent(): Int {
-    return (this * TO_PERCENT).toInt()
-}
-
-private const val TO_PERCENT = 100

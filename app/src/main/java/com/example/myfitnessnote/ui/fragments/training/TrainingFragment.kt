@@ -8,9 +8,9 @@ import com.example.myfitnessnote.R
 import com.example.myfitnessnote.databinding.FragmentTrainingBinding
 import com.example.myfitnessnote.domain.models.Difficulty
 import com.example.myfitnessnote.presentetion.adapters.difficulty_container.DifficultyPagerAdapter
-import com.example.myfitnessnote.presentetion.models.training.TrainingIntent
-import com.example.myfitnessnote.presentetion.models.training.TrainingScreenData
-import com.example.myfitnessnote.presentetion.models.training.TrainingScreenState
+import com.example.myfitnessnote.presentetion.models.days.DaysIntent
+import com.example.myfitnessnote.presentetion.models.days.DaysScreenData
+import com.example.myfitnessnote.presentetion.models.days.DaysScreenState
 import com.example.myfitnessnote.presentetion.viewmodel.TrainingViewModel
 import com.example.myfitnessnote.utils.BindingFragment
 import com.google.android.material.tabs.TabLayout
@@ -41,8 +41,8 @@ class TrainingFragment : BindingFragment<FragmentTrainingBinding>() {
             binding.tvDifficulty.text = Difficulty.entries[0].name
             binding.tvImage.setImageResource(R.drawable.easy)
         }.attach()
-        viewModel.update(TrainingIntent.RequestDaysList)
-        viewModel.trainingScreenState.observe(viewLifecycleOwner) { result ->
+        viewModel.update(DaysIntent.RequestDaysList)
+        viewModel.daysScreenState.observe(viewLifecycleOwner) { result ->
             processingResult(result)
         }
 
@@ -75,19 +75,23 @@ class TrainingFragment : BindingFragment<FragmentTrainingBinding>() {
         }
     }
 
-    private fun processingResult(result: TrainingScreenState) {
+    private fun processingResult(result: DaysScreenState) {
         when (result) {
-            is TrainingScreenState.Content -> {
+            is DaysScreenState.Content -> {
                 showContent(result.data)
             }
 
-            TrainingScreenState.Error -> {
+            DaysScreenState.Error -> {
+
+            }
+
+            DaysScreenState.Loading -> {
 
             }
         }
     }
 
-    private fun showContent(data: TrainingScreenData) = with(binding) {
+    private fun showContent(data: DaysScreenData) = with(binding) {
         val remainsDays = "${requireContext().getString(R.string.remains_days)} ${data.remainsDays}"
         tvTextProgress.text = remainsDays
         tvProgressExercises.setProgress(data.progress, true)
