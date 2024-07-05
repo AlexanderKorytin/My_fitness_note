@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.viewpager2.widget.ViewPager2
 import com.example.myfitnessnote.R
 import com.example.myfitnessnote.databinding.FragmentTrainingBinding
 import com.example.myfitnessnote.domain.models.Difficulty
@@ -13,7 +14,6 @@ import com.example.myfitnessnote.presentetion.models.days.DaysScreenData
 import com.example.myfitnessnote.presentetion.models.days.DaysScreenState
 import com.example.myfitnessnote.presentetion.viewmodel.TrainingViewModel
 import com.example.myfitnessnote.utils.BindingFragment
-import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -38,8 +38,6 @@ class TrainingFragment : BindingFragment<FragmentTrainingBinding>() {
         binding.pagerContainer.adapter = DifficultyPagerAdapter(this)
         TabLayoutMediator(binding.tabLayout, binding.pagerContainer) { tab, position ->
             tab.text = Difficulty.entries[position].name
-            binding.tvDifficulty.text = Difficulty.entries[0].name
-            binding.tvImage.setImageResource(R.drawable.easy)
         }.attach()
         viewModel.update(DaysIntent.RequestDaysList)
         viewModel.daysScreenState.observe(viewLifecycleOwner) { result ->
@@ -47,10 +45,11 @@ class TrainingFragment : BindingFragment<FragmentTrainingBinding>() {
         }
 
         with(binding) {
-            binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-                override fun onTabSelected(tab: TabLayout.Tab?) {
-                    binding.tvDifficulty.text = tab?.text
-                    when (binding.tabLayout.selectedTabPosition) {
+            pagerContainer.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+                override fun onPageSelected(position: Int) {
+                    super.onPageSelected(position)
+                    tvDifficulty.text = Difficulty.entries[position].name
+                    when (position) {
                         0 -> {
                             tvImage.setImageResource(R.drawable.easy)
                         }
@@ -64,13 +63,6 @@ class TrainingFragment : BindingFragment<FragmentTrainingBinding>() {
                         }
                     }
                 }
-
-                override fun onTabUnselected(tab: TabLayout.Tab?) {
-                }
-
-                override fun onTabReselected(tab: TabLayout.Tab?) {
-                }
-
             })
         }
     }
