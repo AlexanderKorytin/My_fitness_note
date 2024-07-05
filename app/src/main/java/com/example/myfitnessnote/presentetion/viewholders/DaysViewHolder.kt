@@ -15,6 +15,16 @@ class DaysViewHolder(private val rootBinding: DayItemBinding) :
             "${dayItem.exercises.size} ${root.context.getString(R.string.exercise)} / ${completedExercises} выполнено"
         tvDayCounter.text = exerciseCounter
         tvDayName.text = dayName
-        tvIsComplete.isChecked = dayItem.isComplete
+        tvIcComplete.setImageResource(getIconComplete(dayItem.isComplete))
+    }
+
+    private fun getIconComplete(isComplete: Boolean): Int {
+        if (isComplete) {
+            rootBinding.tvIcComplete.setColorFilter(itemView.context.getColor(R.color.orange))
+            return R.drawable.ic_complete
+        } else {
+            rootBinding.tvIcComplete.setColorFilter(itemView.context.getColor(R.color.dark_gray))
+            return R.drawable.ic_not_complete
+        }
     }
 }
