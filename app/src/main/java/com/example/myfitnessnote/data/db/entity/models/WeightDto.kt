@@ -6,8 +6,9 @@ import com.example.myfitnessnote.domain.models.WeightItem
 
 @Entity(tableName = WeightDto.TABLE_NAME_WEIGHT)
 data class WeightDto(
+    @PrimaryKey(autoGenerate = true)
+    val id: Int? = null,
     val weightValue: Int,
-    @PrimaryKey(autoGenerate = false)
     val day: Int,
     val month: Int,
     val year: Int
