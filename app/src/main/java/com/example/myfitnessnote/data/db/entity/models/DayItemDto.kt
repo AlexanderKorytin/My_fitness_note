@@ -12,13 +12,15 @@ import com.google.gson.reflect.TypeToken
 data class DayItemDto(
     @PrimaryKey(autoGenerate = true)
     val dayId: Int? = null,
-    val dayNumber: Int,
-    val difficulty: Difficulty = Difficulty.EASY,
     val exercises: String,
+    val exercisesIds: String = EMPTY_STR,
+    val difficulty: Difficulty = Difficulty.EASY,
+    val dayNumber: Int,
     val isComplete: Boolean = false
 ) {
     companion object {
         const val TABLE_NAME_DAYS_LIST = "days_list"
+        const val EMPTY_STR = ""
     }
 }
 
