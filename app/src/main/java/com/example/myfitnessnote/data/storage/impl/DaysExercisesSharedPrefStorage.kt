@@ -26,18 +26,6 @@ data class DaysExercisesSharedPrefStorage(
         return getDayListFromSharedPref()
     }
 
-    override fun getListExercises(): List<ExerciseDto> {
-        return context.resources.getStringArray(R.array.exercise).map {
-            val currentExercise = it.split(EXERCISE_DELIMITER)
-            ExerciseDto(
-                exerciseName = currentExercise[0],
-                exerciseDuration = currentExercise[1],
-                subTitle = currentExercise[0], // времянка
-                exerciseIcon = currentExercise[2],
-                kCal = 0 // времянка
-            )
-        }
-    }
 
     override fun updateDayList(dayList: List<DayItemDto>) {
         sharedPref.edit().putString(DAYS, json.toJson(dayList)).apply()
@@ -59,6 +47,7 @@ data class DaysExercisesSharedPrefStorage(
             .mapIndexed { index, item ->
                 DayItemDto(
                     dayNumber = index,
+                    exercisesIds = item,
                     exercises = getDayListExercises(item.split(LIST_EXERCISES_DELIMITER))
                 )
             }
@@ -71,6 +60,19 @@ data class DaysExercisesSharedPrefStorage(
         val listExercises = getListExercises()
         list.forEach { result.add(listExercises[it.toInt()]) }
         return json.toJson(result, object : TypeToken<List<ExerciseDto>>() {}.type)
+    }
+
+    override fun getListExercises(): List<ExerciseDto> {
+        return context.resources.getStringArray(R.array.exercise).map {
+            val currentExercise = it.split(EXERCISE_DELIMITER)
+            ExerciseDto(
+                exerciseName = currentExercise[0],
+                exerciseDuration = currentExercise[1],
+                subTitle = currentExercise[0], // времянка
+                exerciseIcon = currentExercise[2],
+                kCal = 0 // времянка
+            )
+        }
     }
 
     companion object {
