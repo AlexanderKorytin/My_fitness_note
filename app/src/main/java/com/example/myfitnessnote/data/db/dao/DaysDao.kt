@@ -17,7 +17,7 @@ interface DaysDao {
     fun getDaysByDifficulty(difficulty: Difficulty): Flow<List<DayItemDto>>
 
     @Query("SELECT * FROM ${DayItemDto.TABLE_NAME_DAYS_LIST}")
-    fun getDaysByDifficulty(): Flow<List<DayItemDto>>
+    fun getAllDays(): Flow<List<DayItemDto>>
 
     @Query("SELECT * FROM ${DayItemDto.TABLE_NAME_DAYS_LIST} WHERE dayId = :dayId")
     fun getDayById(dayId: Int): Flow<DayItemDto>
